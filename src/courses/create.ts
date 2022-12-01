@@ -7,7 +7,7 @@ async function CreateData() {
         data: {
             name: 'React',
             description: 'Web Framework',
-            duration: 340
+            duration: 340,
         }
     })
 
