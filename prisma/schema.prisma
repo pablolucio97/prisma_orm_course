@@ -12,13 +12,13 @@ datasource db {
 
 model Courses {
   //generates automatically
-  id            String   @id @default(uuid())
-  name          String   @unique
-  description   String   @unique
+  id            String    @id @default(uuid())
+  name          String    @unique
+  description   String    @unique
   duration      Int
-  created_at    DateTime @default(now())
+  created_at    DateTime  @default(now())
   teacher       Teachers? @relation(fields: [fk_id_teacher], references: [id])
-  fk_id_teacher String? @unique 
+  fk_id_teacher String?   @unique
 
   //table name
   @@map("courses")
@@ -40,4 +40,21 @@ model Teachers {
   course     Courses?
 
   @@map("teachers")
+}
+
+model Authors {
+  id   String @id @default(uuid())
+  name String @unique
+  books Books[]
+  
+  @@map("authors")
+}
+
+model Books{
+  id String @id @default(uuid())
+  name String @unique
+  author_id String
+  author Authors @relation(fields: [author_id], references: [id])
+
+  @@map("books")
 }
