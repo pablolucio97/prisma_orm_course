@@ -132,6 +132,51 @@ async function createToZero(){
 
 createToZero()
 
+----------
+
+5) To read data from relationship table, you can query for 
+both data from this table or query for data in one of the 
+tables in the relationship and includes data from the another 
+table too. Example:
+
+From the relationship table:
+
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
+
+async function findWithRelation() {
+    const result = await prisma.coursesModules.findMany({
+        include: {
+            courses: true,
+            modules: true,
+        }
+    })
+    console.log(result)
+}
+
+findWithRelation()
+
+------
+
+From one of the tables in the relationship:
+
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
+
+async function findWithRelation() {
+    const result = await prisma.courses.findMany({
+        include: {
+            teacher: true
+        }
+    })
+
+    console.log(result)
+}
+
+findWithRelation()
+
 
 
 
